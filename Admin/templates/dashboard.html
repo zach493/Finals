@@ -1,0 +1,275 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+    font-size: 16px;
+    margin-left: 20px;
+    }
+
+    .navbar-brand {
+      margin-top: 20px;
+      width: 100%;
+      text-decoration: none;
+      color: white;
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    .container {
+      margin-top: -9px;
+      margin-left: -20px;
+      position: fixed;
+      width: 255px;
+      height: 100%;
+      background: linear-gradient(45deg, gold, green);
+      overflow: hidden;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .line {
+      height: 0vh;
+      margin-top: auto;
+      margin-bottom: 10px;
+      border-bottom: 3px solid white;
+    }
+
+    li {
+      text-decoration: none;
+      font-weight: 100;
+      font-size: 14px;
+      margin-top: 30px;
+      list-style-type: none;
+      margin-left: -12px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+   
+    }
+
+    .nav-link:hover {
+     color: darkgreen;
+     font-weight: 780;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .top-bar {
+      margin-top: -7px;
+      margin-left: 235px;
+      position: fixed;
+      height: 83px;
+      width: 85%;
+      background: white;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      h2{
+      margin-left: 20px;
+      margin-top: 30px;
+    }
+
+    .cards .card1 {
+      width: 90px;
+      height: 110px;
+      background: linear-gradient(45deg, gold, green);
+      padding: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+      margin-left: 255px;
+      top: 108px;
+  }
+
+  .cards .card2 {
+    width: 90px;
+    height: 110px;
+    background: linear-gradient(45deg, gold, green);
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    margin-left: 520px;
+    top: -99px;
+  }
+
+  .cards .card3 {
+    width: 90px;
+    height: 110px;
+    background: linear-gradient(45deg, gold, green);
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    margin-left: 785px;
+    top: -310px;
+  }
+
+  .cards .card4 {
+    width: 90px;
+    height: 110px;
+    background: linear-gradient(45deg, gold, green);
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    margin-left: 1050px;
+    top: -520px;
+  }
+
+  .cards .card1:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.cards .card2:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+
+.cards .card3:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+.cards .card4:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
+  .number {
+      margin-bottom: 6px;
+      font-size: 40px;
+      font-weight: 500;
+      color: white;
+  }
+
+  .cardname {
+      color: #444;
+      font-weight: 600;
+      text-decoration: none;
+  }
+
+  .cardname:hover {
+      color: black;
+      font-weight: 700;
+  }
+  
+  </style>
+
+    </head>
+    <body>
+    <div class="container">
+        <nav class="navbar">
+        <h1 class="navbar-brand">Brgy. Dalipuga Health Care Center</h1>
+        <div class="line"></div>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'staff' %}">Staff</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'services' %}" >Services</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'residents' %}">Residents</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'adm_app' %}">Appointment (Patient)</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'guardian_app' %}">Appointment (Guardian)</a>
+              </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+            </li>
+        </ul>
+        </nav>
+    </div>
+
+    <div class="top-bar">
+        <h2 class="navbar-title">Dashboard</h2>
+    </div>
+
+    <div class="MainCardsContainer">
+      <div class="cards">
+          <div class="card1">
+              <a href="residents.html"> 
+                  <div class="card-content">
+                      <div class="number">{{ total_residents }}</div>
+                      <div class="cardname">Total Registered Residents</div>
+                  </div>
+              </a>
+          </div>
+      </div>
+
+      <div class="cards">
+          <div class="card2">
+              <a href="adm_app.html"> 
+                  <div class="card-content">
+                      <div class="number">{{ total_appointments }}</div>
+                      <div class="cardname">Pending Appointment</div>
+                  </div>
+              </a>            
+          </div>
+      </div>
+
+      <div class="cards">
+          <div class="card3">
+              <a href="services.html">
+                  <div class="card-content">
+                      <div class="number">{{ total_services }}</div>
+                      <div class="cardname">Total Services</div>
+                  </div>
+              </a>
+          </div>
+      </div>
+
+      <div class="cards">
+          <div class="card4">
+              <a href="staff.html">
+                  <div class="card-content">
+                      <div class="number">{{ total_staff }}</div>
+                      <div class="cardname">Total Staff</div>
+                  </div>
+              </a>
+          </div>
+      </div>
+        
+</body>
+</html>

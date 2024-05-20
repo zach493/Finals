@@ -1,0 +1,27 @@
+{% extends 'baseindex.html' %}
+{% load static %}
+{% block cta %}
+    <title>Login</title>
+{% endblock cta %}
+
+{% block content %}
+<body>
+    <div class="login">
+        <div class="form-container">
+            <form method="post">
+            {% csrf_token %}
+            <h3>Login</h3>
+            
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %} 
+            <input type="text" name="email" required placeholder="Email">
+            <input type="password" name="password" required placeholder="Password">
+            <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{% url 'register' %}" class="btn btn-link">Register here</a></p>
+        </div>
+    </div>    
+</body>
+</html>
+{% endblock content %}

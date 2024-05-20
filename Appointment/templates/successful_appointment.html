@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cta %}
+<title>Successful Appointment</title>
+{% endblock cta %}
+
+{% block content %}
+
+<style>
+    h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+    table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+    th, td {
+            padding: 12px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+    
+    th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+    tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    td {
+            color: #555;
+        }
+
+</style>
+<h2>Appointment Successfully Sent</h2>
+<a class="nav-link" href="{% url 'appoi' %}">Click Here to go back to appointment</a>
+<body>
+
+    <h2>Appointment Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Mobile Number</th>
+                <th>Permanent Address</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Service</th>
+                <th>Request Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if request.session.appointment %}
+                {% if request.session.appointment.request == 'Patient' %}
+                    <tr>
+                        <td>{{ request.session.appointment.email }}</td>
+                        <td>{{ request.session.appointment.first_name }}</td>
+                        <td>{{ request.session.appointment.last_name }}</td>
+                        <td>{{ request.session.appointment.age }}</td>
+                        <td>{{ request.session.appointment.phone }}</td>
+                        <td>{{ request.session.appointment.permanent_address }}</td>
+                        <td>{{ request.session.appointment.appointment_date }}</td>
+                        <td>{{ request.session.appointment.appointment_time }}</td>
+                        <td>{{ request.session.appointment.service_id }}</td>
+                        <td>{{ request.session.appointment.request }}</td>
+                    </tr>
+                {% elif request.session.appointment.request == 'Guardian' %}
+                    <tr>
+                        <td>{{ request.session.appointment.email }}</td>
+                        <td>{{ request.session.appointment.first_name }}</td>
+                        <td>{{ request.session.appointment.last_name }}</td>
+                        <td>{{ request.session.appointment.age }}</td>
+                        <td></td> <!-- Mobile Number not applicable for guardian -->
+                        <td>{{ request.session.appointment.permanent_address }}</td>
+                        <td></td> <!-- Appointment Date not applicable for guardian -->
+                        <td></td> <!-- Appointment Time not applicable for guardian -->
+                        <td>{{ request.session.appointment.service_id }}</td>
+                        <td>{{ request.session.appointment.request }}</td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+{% endblock content %}

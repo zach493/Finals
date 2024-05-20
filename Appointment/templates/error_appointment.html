@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cta %}
+<title>Inbox</title>
+{% endblock cta %}
+
+{% block content %}
+
+<style>
+    h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+    table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+    th, td {
+            padding: 12px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+    
+    th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+    tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    td {
+            color: #555;
+        }
+
+</style>
+
+<body>
+
+    <h2>Appointment Error</h2>
+    <h1>Cannot Set Appointment</h1>
+    <h2>
+        Appointment Not Set. Please Try Again.
+        <a class="nav-link" href="{% url 'appoi' %}">Click Here to go back to appointment</a>
+    </h2>
+    
+
+
+
+</body>
+{% endblock content %}
+
+   

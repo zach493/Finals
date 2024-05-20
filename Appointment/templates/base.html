@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{ title }}</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+</head>
+<style>
+.dropdown-menu {
+    background-color: #ffffff; 
+    border: 1px solid rgba(0, 0, 0, 0.125); 
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.dropdown-item {
+    color: #212529; 
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #f8f9fa; 
+    color: #212529; 
+}
+.navbar-nav .dropdown-menu {
+  margin-top: 0;
+}
+
+.nav-link {
+  padding: .5rem 1rem;
+}
+
+</style>
+<body>
+  <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}"> Brgy. Dalipuga Health Care Center</a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navcol-1">
+        <ul class="nav navbar-nav">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" href="#team">Our Team</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" href="#services">Services</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" href="#reviews">Testimonial</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" href="#contact">Contact Us</a>
+          </li>
+          
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Welcome, {{ request.user.first_name|default:request.user.username }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">User Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'inbox' %}">Inbox</a></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" href="login">Login/Register</a>
+          </li>
+          {% endif %}
+
+          <!--<li class="nav-item" role="presentation">
+            <a href="" style="float: left;cursor:pointer;" aria-expanded="true" title="You Have 6 New Appointments">
+              <i class="far fa-envelope" style="font-size: 30px; float: left; margin-top: 7px; color: black"></i>
+            </a>
+            <span class="badge badge-danger">{{ count }}</span>-->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  {% block cta %}{% endblock cta %}
+
+  {% block content %}{% endblock content %}
+
+  <script type="text/javascript" src="{% static '/js/bootstrap.min.js' %}"></script>
+
+  <script>
+  </script>
+</body>
+
+</html>

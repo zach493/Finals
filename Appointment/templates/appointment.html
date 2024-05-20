@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% if messages %}
+    <div class="card notification-card notification-invitation">
+        <div class="card-body">
+        {% for message in messages %}
+                <div class="card-title">{{message}} </div>
+            {% endfor %}
+        </div>
+    </div> 
+    {% endif %}
+    
+    {% if request.path == '/success-page/' %}
+    <div class="alert alert-success" role="alert">
+        Appointment Successfully Sent. Please wait for admin confirmation. Regularly check your inbox.
+    </div>
+{% elif request.path == '/error-page/' %}
+    <div class="alert alert-danger" role="alert">
+        Error: Cannot send appointment at this moment. Please try again later.
+    </div>
+{% endif %}
+
+    <script>
+        function showFields() {
+            console.log("showFields() function called");
+            var role = document.getElementById("role").value;
+            console.log("Selected role:", role);
+            if (role === "patient") {
+                console.log("Displaying patient fields");
+                document.getElementById("patientFields").style.display = "block";
+                document.getElementById("guardianFields").style.display = "none";
+            } else if (role === "guardian") {
+                console.log("Displaying guardian fields");
+                document.getElementById("patientFields").style.display = "none";
+                document.getElementById("guardianFields").style.display = "block";
+            }
+        }
+        
+        window.onload = function() {
+            showFields();
+        };
+        // Add an event listener for DOMContentLoaded event
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get today's date
+        var today = new Date();
+
+        // Get day, month, and year
+        var day = today.getDate();
+        var month = today.getMonth() + 1; // January is 0, so we add 1
+        var year = today.getFullYear();
+
+        // Format day and month to two digits if they are single digits
+        day = day < 10 ? '0' + day : day;
+        month = month < 10 ? '0' + month : month;
+
+        // Formatted date as "d m y"
+        var formattedDate = day + '/' + month + '/' + year;
+
+        // Set the input field value to the current date
+        document.getElementById("current").value = formattedDate;
+    });
+        </script>
+
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>Set an appointment</h3>
+                <form class="form-card" method="POST" action="{% url 'appoi' %}">
+                    {% csrf_token %}
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">Are you a patient or guardian?<span class="text-danger"> *</span></label> 
+                            <select id="role" name="role" class="form-control" onchange="showFields()">
+                                <option value="patient">Patient</option>
+                                <option value="guardian">Guardian</option>
+                            </select>
+                        </div>
+                    </div>
+
+                <form class="form-card" method="POST" action="{% url 'appoi' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="role" value="patient">
+                    <div id="patientFields" style="display: none;">
+                        <div class="row justify-content-between text-left">
+                            
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Current Date<span class="text-danger"> *</span></label> 
+                                <input type="text" id="current" name="current" placeholder="" onblur="validate(5)" readonly>
+                            </div>
+                          
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Time of Appointment<span class="text-danger"> *</span></label> 
+                                <input type="time" id="appointment_time" name="appointment_time" placeholder="" onblur="validate(6)"> 
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Date of Appointment<span class="text-danger"> *</span></label> 
+                                <input type="date" id="appointment_date" name="appointment_date" placeholder="" onblur="validate(5)"> 
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Service<span class="text-danger"> *</span></label> 
+                                <select id="patient_service_id" name="service_id" class="form-control">
+                                    {% for service in services %}
+                                        <option value="{{ service.name }}">{{ service.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> 
+                                <button type="submit" class="btn-block btn-primary">Send</button> 
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                    
+                <form class="form-card" method="POST" action="{% url 'appoi' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="role" value="guardian">                  
+                    <div id="guardianFields" style="display: none;">
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">First Name<span class="text-danger"> *</span></label> 
+                                <input type="text" id="first_name" name="first_name" placeholder="" onblur="validate(1)"> 
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Middle Name</label> 
+                                <input type="text" id="middle_name" name="middle_name" placeholder="" onblur="validate(2)"> 
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Last Name<span class="text-danger"> *</span></label> 
+                                <input type="text" id="last_name" name="last_name" placeholder="" onblur="validate(2)"> 
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Date of Birth<span class="text-danger"> *</span></label> 
+                                <input type="date" id="date_of_birth" name="date_of_birth" placeholder="" onblur="validate(3)"> 
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Age<span class="text-danger"> *</span></label> 
+                                <input type="number" id="age" name="age" placeholder="" onblur="validate(4)"> 
+                            </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Permanent Address</label> 
+                                <textarea id="permanent_address" name="permanent_address" placeholder="" onblur="validate(5)"></textarea> 
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-12 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Other Concerns</label> 
+                                <textarea id="other_concerns" name="other_concerns" placeholder=""></textarea> 
+                            </div>
+                        </div>
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Service<span class="text-danger"> *</span></label> 
+                                <select id="guardian_service_id" name="service_id" class="form-control">
+                                    {% for service in services %}
+                                        <option value="{{ service.name }}">{{ service.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> 
+                                <button type="submit" class="btn-block btn-primary">Send</button> 
+                            </div>
+                        </div>
+                    </div>
+                
+                    
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+    

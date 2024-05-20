@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block cta %}
+<div class="container hero">
+  <div class="row">
+      <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
+          <h1>Barangay Dalipuga Health Care Center Appointment System</h1>
+          <p> Welcome to Barangay Dalipuga Health Care Center's appointment system, where you can easily schedule your medical consultations and services with convenience and efficiency.</p>
+          <a href="{% url 'appoi' %}" class="btn btn-light btn-lg action-button" type="button">Set an appointment</a>
+        </div>
+      <div class="logo">
+          <img src="static/img/dalipuga.png">
+      </div>
+  </div>
+</div>
+
+{% endblock cta %}
+
+{% block content %}
+<section class="container py-5" style="margin-block:200px;" id="team">
+  <div class="row text-center ">
+      <div class="col-lg-8 mx-auto">
+          <h1 class="display-4">Brgy. Dalipuga Medical Team</h1>
+          <p class="lead">Trust in the expertise and reliability of experienced professionals who have proven their competence in their field.</p>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row text-center">
+          {% for staff in staffs %}
+          <!-- Team item -->
+          <div class="col-xl-3 col-sm-6 mb-5">
+              <div class="card border-0 shadow">
+                  <img src="{{ staff.image.url }}" alt="{{ staff.name }}" class="card-img-top">
+                  <h5 class="mb-0">{{ staff.name }}</h5>
+                  <span class="small text-uppercase text-muted">{{ staff.position }}</span>
+              </div>
+          </div><!-- End -->
+          {% endfor %}
+      </div>
+  </div>
+</section><!-- End -->
+
+
+
+
+<section id="services">
+  <div class="bg-primary text-center py-5 mb-4">
+    <div class="container">
+      <h1 class="fw-light text-white">Services</h1>
+      <p class="overview">We provide compassionate and expert care to our community. You are at the center of everything we do. Let us be your healthcare partner.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      {% for service in services %}
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow">
+          <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.name }}">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">{{ service.name }}</h5>
+            <div class="card-text text-black-50">{{ service.Description }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="text-center conatiner" style="margin-block:200px;" id="reviews">
+    <h2>Satisfied Patients</h2>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>   
+        
+        <div class="carousel-inner">		
+            <div class="carousel-item active">
+                <div class="img-box"><img src="static/img/dalipuga.png" alt=""></div>
+                <p class="testimonial">Phasellus vitae suscipit justo. Mauris pharetra feugiat ante id lacinia. Etiam faucibus mauris id tempor egestas. Duis luctus turpis at accumsan tincidunt. Phasellus risus risus, volutpat vel tellus ac, tincidunt fringilla massa. Etiam hendrerit dolor eget rutrum.</p>
+                <p class="overview">Haz Elly</p>
+            </div>
+            <div class="carousel-item">
+                <div class="img-box"><img src="static/img/dalipuga.png" alt=""></div>
+                <p class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Vestibulum idac nisl bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
+                <p class="overview">Nej Finer</p>
+            </div>
+            <div class="carousel-item">
+                <div class="img-box"><img src="static/img/dalipuga.png" alt=""></div>
+                <p class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget nisi a mi suscipit tincidunt. Utmtc tempus dictum risus. Pellentesque viverra sagittis quam at mattis. Suspendisse potenti. Aliquam sit amet gravida nibh, facilisis gravida odio. Phasellus auctor velit.</p>
+                <p class="overview">Neo Epac</p>
+            </div>		
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="card m-4 p-4">
+    <div class="container">
+        <div class="row text-center">
+
+            <div class="col-sm-6">
+            <div class="contact-detail-box">
+              <i class="far fa-envelope text-colored fa-3x"></i>
+              <h4>Get In Touch</h4>
+              <abbr title="Phone">Phone No.</abbr> (63) 065 3263<br>
+              Email: <a href="mailto:email@email.com" class="text-muted">krishnahmunalem.lorejo@my.smciligan.edu.ph</a>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="contact-detail-box">
+              <i class="fa fa-map-marker fa-3x text-colored"></i>
+              <h4>Our Location</h4>
+
+              <address>
+              Brgy. Dalipuga Health Center, Dalipuga, Iligan City<br>
+              Lanao del Norte, 9200<br>
+            </address>
+            </div>
+          </div>
+        </div>
+       
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="contact-map">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3947.9583679903726!2d124.25287983858843!3d8.306936191762773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32557168cc639d23%3A0x668eb638757d603!2sDalipuga%20Health%20Center!5e0!3m2!1sen!2sph!4v1714572078952!5m2!1sen!2sph" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width: 100%; height: 360px;"></iframe>
+            </div>
+          </div>
+          
+          <div class="col-sm-6">
+            <form role="form" name="ajax-form" id="ajax-form" method="post" class="form-main" action="{% url 'home' %}">
+            {% csrf_token %}
+              <div class="form-group">
+                <label for="name2">Name</label>
+                <input class="form-control" id="name2" name="name" type="text" placeholder="name">
+                <div class="error" id="err-name" style="display: none;">Please enter name</div>
+              </div> 
+
+              <div class="form-group">
+                <label for="email2">Email</label>
+                <input class="form-control" id="email2" name="email" type="text" placeholder="email">
+                <div class="error" id="err-emailvld" style="display: none;">Email is not a valid format</div> 
+              </div>
+
+              <div class="form-group">
+                <label for="message2">Message</label>
+                <textarea class="form-control" id="message2" name="message" rows="5" placeholder="message">Message</textarea>
+
+                <div class="error" id="err-message" style="display: none;">Please enter message</div>
+              </div> 
+
+              <div class="row">            
+                  <button type="submit" class="btn btn-primary btn-shadow btn-rounded w-md" id="send">Send</button>
+                </div> 
+              </div> 
+
+            </form> 
+          </div> 
+
+        </div> 
+
+      </div>
+</section>
+
+
+{% endblock content %}
